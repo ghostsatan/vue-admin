@@ -1,0 +1,1 @@
+window.showLog = (process.env.NODE_ENV === 'development');

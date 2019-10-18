@@ -1,0 +1,6 @@
+build/*.js
+config/*.js
+mock/*
+src/vendors/*.js
+vue.config.js
+custom.config.js
