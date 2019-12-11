@@ -72,6 +72,11 @@ export default [
         "id": 206,
         "name": "富文本编辑器",
         "path": "/Components/Tinymce",
+      },
+      {
+        "id": 200,
+        "name": "地图",
+        "path": "/Components/Map",
       }
     ]
   },

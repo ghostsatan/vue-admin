@@ -24,6 +24,8 @@ const Tinymce = r => require.ensure([], () => r(require('@/router/Components/Tin
 const Permission = r => require.ensure([], () => r(require('@/router/System/Permission')), 'System');
 const Roles = r => require.ensure([], () => r(require('@/router/System/Roles')), 'System');
 
+const Map = r => require.ensure([], () => r(require('@/router/map')), 'Map');
+
 Vue.use(Router);
 
 const router = new Router({
@@ -185,6 +187,15 @@ const router = new Router({
         title: '角色管理'
       }
     },
+    //地图
+    {
+      path: '/Components/Map',
+      name: 'map',
+      component: Map,
+      meta: {
+        title: '地图'
+      }
+    }
     
   ]
 });
