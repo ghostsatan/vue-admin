@@ -14,7 +14,7 @@ module.exports = {
     {
         id:2,
         hotelId:2,
-        hotelName:"李雨蒙汉堡店",
+        hotelName:"测试门店",
         startTime:1545012784000,
         testConnectResult:2,
         releaseConnectResult:1,
@@ -23,7 +23,7 @@ module.exports = {
     {
         id:3,
         hotelId:583,
-        hotelName:"阿蒙杂货铺",
+        hotelName:"测试门店",
         startTime:1545012784000,
         testConnectResult:2,
         releaseConnectResult:1,

@@ -26,6 +26,8 @@ const Roles = r => require.ensure([], () => r(require('@/router/System/Roles')),
 
 const Map = r => require.ensure([], () => r(require('@/router/map')), 'Map');
 
+const SpanTable = r => require.ensure([], () => r(require('@/router/Table/SpanTable.vue')), 'SpanTable');
+
 Vue.use(Router);
 
 const router = new Router({
@@ -90,6 +92,14 @@ const router = new Router({
       component: ComplexTable ,
       meta: {
         title: '综合性表格'
+      }
+    },
+    {
+      path: '/Table/SpanTable',
+      name: 'SpanTable',
+      component: SpanTable ,
+      meta: {
+        title: '合并单元格表格'
       }
     },
     {

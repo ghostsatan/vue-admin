@@ -34,6 +34,11 @@ export default [
         "id": 307,
         "name": "新增行表格",
         "path": "/Table/AddTable"
+      },
+      {
+        "id": 309,
+        "name": "合并单元格表格",
+        "path": "/Table/SpanTable"
       }
     ]
   },
