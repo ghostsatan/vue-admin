@@ -57,7 +57,7 @@ module.exports = {
   // 它支持webPack-dev-server的所有选项
   devServer: {
     port: port, // 端口号
-    host: 'localhost',
+    host: '0.0.0.0',
     https: false, // https:{type:Boolean}
     open: true, //配置自动启动浏览器,
     index: '/account.html',   //启动项目后，默认进入的页面地址

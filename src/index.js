@@ -12,7 +12,9 @@ import Util from '@/components/util/util';
 import 'element-ui/lib/theme-chalk/index.css';
 import ElementUI from 'element-ui';
 // 引入echarts
-import echarts from 'echarts'
+import echarts from 'echarts';
+// 引入i18n国际化
+import i18n from './i18n/';
 
 Vue.prototype.$echarts = echarts 
 
@@ -43,5 +45,6 @@ Vue.prototype.$util = Util;
 global.vm = new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount('#app');

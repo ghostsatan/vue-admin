@@ -30,8 +30,8 @@
         ></el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="small" @click="search">搜索</el-button>
-        <el-button size="small">重置</el-button>
+        <el-button type="success" size="small" @click="search">{{$t("search")}}</el-button>
+        <el-button size="small">{{$t("reset")}}</el-button>
       </el-form-item>
     </el-form>
     <div>

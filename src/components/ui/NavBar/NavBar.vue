@@ -15,6 +15,9 @@
         </div>
       </el-col>
       <div class="login-btn">
+        <el-button @click.native="changeType('zh')">切换中文</el-button>
+        <el-button @click.native="changeType('en')">切换英文</el-button>
+
         <el-dropdown @command="handleCommand" trigger="click">
           <span class="el-dropdown-link">
             <span class="name">欢迎你，afdasfd</span>
@@ -81,6 +84,13 @@ export default {
       }
       
     },
+    changeType(type){
+      console.log(type);
+      // 此处做了语言选择记录
+      localStorage.setItem('locale',type)
+      // 修改显示语言
+      this.$i18n.locale = type;
+    }
   }
 };
 </script>
