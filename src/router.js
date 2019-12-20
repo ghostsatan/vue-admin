@@ -1,13 +1,13 @@
-/* jshint esversion: 6 */ 
+/* jshint esversion: 6 */
 import Vue from 'vue';
 import Router from 'vue-router';
 const Table = r => require.ensure([], () => r(require('@/router/Table/TableList.vue')), 'Table');
 const Detail = r => require.ensure([], () => r(require('@/router/Table/Detail.vue')), 'Table');
-const List = r => require.ensure([], () => r(require('@/router/Table/List.vue')),'Table');
-const DynamicTable = r => require.ensure([], () => r(require('@/router/Table/DynamicTable/index')),'Table');
-const EditTable = r => require.ensure([], () => r(require('@/router/Table/EditTable')),'Table');
-const ComplexTable = r => require.ensure([], () => r(require('@/router/Table/ComplexTable')),'Table');
-const AddTable = r => require.ensure([], () => r(require('@/router/Table/AddTable')),'Table');
+const List = r => require.ensure([], () => r(require('@/router/Table/List.vue')), 'Table');
+const DynamicTable = r => require.ensure([], () => r(require('@/router/Table/DynamicTable/index')), 'Table');
+const EditTable = r => require.ensure([], () => r(require('@/router/Table/EditTable')), 'Table');
+const ComplexTable = r => require.ensure([], () => r(require('@/router/Table/ComplexTable')), 'Table');
+const AddTable = r => require.ensure([], () => r(require('@/router/Table/AddTable')), 'Table');
 
 const Login = r => require.ensure([], () => r(require('@/router/Login/Login.vue')), 'Login');
 
@@ -39,14 +39,17 @@ const router = new Router({
     {
       name: '登录',
       path: '/login',
-      component:Login,
+      component: Login,
     },
     {
       name: '表格',
       path: '/TableList',
-      component:Table,
+      component: Table,
       meta: {
-        title: '表格功能'
+        title: '表格功能',
+        type: 'menu',
+        active: false,
+        index: "/TableList"
       }
     },
     {
@@ -55,7 +58,10 @@ const router = new Router({
       component: Detail,
       meta: {
         title: [{
-          name: '表格功能',
+          name: '表格功能111',
+          type: 'menu',
+          active: false,
+          index: "/Detail",
           path: '/Table/Detail',
         }, {
           name: '表单提交校验'
@@ -67,47 +73,65 @@ const router = new Router({
       name: '统计发范德萨发斯蒂芬',
       component: List,
       meta: {
-        title: '表格统计筛选排序'
+        title: '表格统计筛选排序',
+        type: 'menu',
+        index: "/List",
+        active: false
       }
     },
     {
       path: '/DynamicTable',
       name: '动态表格',
-      component: DynamicTable ,
+      component: DynamicTable,
       meta: {
-        title: '动态表格'
+        title: '动态表格',
+        type: 'menu',
+        active: false,
+        index: "/DynamicTable",
       }
     },
     {
       path: '/EditTable',
       name: 'EditTable',
-      component: EditTable ,
+      component: EditTable,
       meta: {
-        title: '可编辑表格'
+        title: '可编辑表格',
+        type: 'menu',
+        active: false,
+        index: '/EditTable'
       }
     },
     {
       path: '/Table/ComplexTable',
       name: 'ComplexTable',
-      component: ComplexTable ,
+      component: ComplexTable,
       meta: {
-        title: '综合性表格'
+        title: '综合性表格',
+        type: 'menu',
+        active: false,
+        index: "/Table/ComplexTable"
       }
     },
     {
       path: '/Table/SpanTable',
       name: 'SpanTable',
-      component: SpanTable ,
+      component: SpanTable,
       meta: {
-        title: '合并单元格表格'
+        title: '合并单元格表格',
+        type: 'menu',
+        active: false,
+        index: '/Table/SpanTable'
       }
     },
     {
       path: '/Table/AddTable',
       name: 'AddTable',
-      component: AddTable ,
+      component: AddTable,
       meta: {
-        title: '添加行表格'
+        title: '添加行表格',
+        type: 'menu',
+        active: false,
+        index: '/Table/AddTable'
       }
     },
     {
@@ -115,7 +139,9 @@ const router = new Router({
       name: 'Tree',
       component: Tree,
       meta: {
-        title: '树结构'
+        title: '树结构',
+        type: 'menu',
+        active: false
       }
     },
     {
@@ -123,7 +149,9 @@ const router = new Router({
       name: 'PanelGroup',
       component: PanelGroup,
       meta: {
-        title: '卡片'
+        title: '卡片',
+        type: 'menu',
+        active: false
       }
     },
     {
@@ -131,7 +159,9 @@ const router = new Router({
       name: 'FileUpload',
       component: FileUpload,
       meta: {
-        title: '文件上传'
+        title: '文件上传',
+        type: 'menu',
+        active: false
       }
     },
     {
@@ -139,7 +169,9 @@ const router = new Router({
       name: 'Search',
       component: Search,
       meta: {
-        title: '通用搜索'
+        title: '通用搜索',
+        type: 'menu',
+        active: false
       }
     },
     {
@@ -147,7 +179,9 @@ const router = new Router({
       name: 'Dragable',
       component: Dragable,
       meta: {
-        title: '可拖拽todolist'
+        title: '可拖拽todolist',
+        type: 'menu',
+        active: false
       }
     },
     {
@@ -155,7 +189,9 @@ const router = new Router({
       name: '富文本编辑器',
       component: Tinymce,
       meta: {
-        title: '富文本编辑器'
+        title: '富文本编辑器',
+        type: 'menu',
+        active: false
       }
     },
     //登录
@@ -164,13 +200,15 @@ const router = new Router({
       name: 'Login',
       component: Login
     },
-   
+
     {
       path: '/Charts/LineCharts',
       name: 'echart',
       component: Line,
       meta: {
-        title: '柱状图'
+        title: '柱状图',
+        type: 'menu',
+        active: false
       }
     },
     {
@@ -178,7 +216,9 @@ const router = new Router({
       name: 'Mixchart',
       component: MixChart,
       meta: {
-        title: '混合图表'
+        title: '混合图表',
+        type: 'menu',
+        active: false
       }
     },
     {
@@ -186,7 +226,9 @@ const router = new Router({
       name: 'Permission',
       component: Permission,
       meta: {
-        title: '权限管理'
+        title: '权限管理',
+        type: 'menu',
+        active: false
       }
     },
     {
@@ -194,7 +236,9 @@ const router = new Router({
       name: 'Roles',
       component: Roles,
       meta: {
-        title: '角色管理'
+        title: '角色管理',
+        type: 'menu',
+        active: false
       }
     },
     //地图
@@ -203,17 +247,19 @@ const router = new Router({
       name: 'map',
       component: Map,
       meta: {
-        title: '地图'
+        title: '地图',
+        type: 'menu',
+        active: false
       }
     }
-    
+
   ]
 });
 router.beforeEach((to, from, next) => {
   //此处获取用户信息，可以用你自己的方式获取登陆后用户信息
   const userInfo = localStorage.userInfo;
   //判断是否存在用户信息、或者该页面是否需要登陆
-  if (userInfo || !to.meta.login ) {
+  if (userInfo || !to.meta.login) {
     //如果能获取到用户信息，说明用户登陆了，或者该页面不需要登陆也能进入就直接放行进入该页面
     next();
   } else {

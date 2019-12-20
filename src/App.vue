@@ -4,10 +4,11 @@
     <div class="body-content">
       <SideNav />
       <div class="content-wrapper">
-        <BreadCrumb/>
-         <div class="app-wrap">
-        <!-- 此处放置el-tabs代码 -->
-        <!-- <div class="template-tabs">
+        <BreadCrumb />
+        <div class="app-wrap">
+          <TopNav />
+          <!-- 此处放置el-tabs代码 -->
+          <!-- <div class="template-tabs">
           <el-tabs
             v-model="activeIndex"
             type="border-card"
@@ -22,14 +23,16 @@
               :name="item.route">
             </el-tab-pane>
           </el-tabs>
-        </div>
-          <div class="content-wrap">
+          </div>-->
+          <!-- <div class="content-wrap">
             <router-view/>
-          </div> -->
-      </div>
+          </div>-->
+        </div>
         <div class="app-content">
           <div class="content-inner-wrapper">
-            <router-view v-if="isRouterAlive"></router-view>
+            <keep-alive :include="navTagIndexs">
+              <router-view v-if="isRouterAlive"></router-view>
+            </keep-alive>
           </div>
         </div>
       </div>
@@ -38,107 +41,117 @@
 </template>
 
 <script>
-import BreadCrumb from './components/ui/BreadCrumb/BreadCrumb.vue';
-import NavBar from './components/ui/NavBar/NavBar.vue';
-import SideNav from './components/ui/SideNav/SideNav.vue';
+import { mapGetters, mapState } from "vuex";
+import BreadCrumb from "./components/ui/BreadCrumb/BreadCrumb.vue";
+import NavBar from "./components/ui/NavBar/NavBar.vue";
+import SideNav from "./components/ui/SideNav/SideNav.vue";
+import TopNav from "./components/ui/TopNav/TopNav";
 export default {
-  provide () {
+  provide() {
     return {
       reload: this.reload
     };
+  },
+  computed: {
+    ...mapGetters(["navTagIndexs"]),
+    ...mapState(["isNavMenuOpen"])
   },
   components: {
     BreadCrumb,
     NavBar,
     SideNav,
+    TopNav
   },
   data() {
     return {
       isRouterAlive: true
     };
   },
-  created () {
+  created() {
     //获取vuex里的数据
     this.$axios.post("mock/test/role").then(res => {
       if (res.code === 200) {
-        this.$store.commit('setUserInfo', res.data);
+        this.$store.commit("setUserInfo", res.data);
       }
     });
   },
   methods: {
-    reload () {
+    reload() {
       this.isRouterAlive = false;
-      this.$nextTick(function(){
+      this.$nextTick(function() {
         this.isRouterAlive = true;
       });
     },
     //tab切换时，动态的切换路由
-    tabClick (tab) {
+    tabClick(tab) {
       let path = this.activeIndex;
       console.log(path);
       // 用户详情页的时候，对应了二级路由，需要拼接添加第二级路由
-      if (this.activeIndex === '/userInfo') {
+      if (this.activeIndex === "/userInfo") {
         // path = this.activeIndex + '/' + this.$store.state.userInfo.name;
       }
-      this.$router.push({path: path});
+      this.$router.push({ path: path });
     },
-    tabRemove (targetName) {
+    tabRemove(targetName) {
       // 首页不可删除
       // if(targetName == '/') {
       //   return;
       // }
-      this.$store.commit('delete_tabs', targetName);
+      this.$store.commit("delete_tabs", targetName);
       if (this.activeIndex === targetName) {
         // 设置当前激活的路由
         if (this.options && this.options.length >= 1) {
           console.log(this.options);
-          this.$store.commit('set_active_index', this.options[this.options.length-1].route);
-          this.$router.push({path: this.activeIndex});
+          this.$store.commit(
+            "set_active_index",
+            this.options[this.options.length - 1].route
+          );
+          this.$router.push({ path: this.activeIndex });
         } else {
           // this.$router.push({path: '/'});
         }
       }
     }
-  },
-  computed: {
-    options () {
-      return this.$store.state.options;
-    },
-    activeIndex: {
-      get () {
-        return this.$store.state.activeIndex;
-      },
-      set (val) {
-        this.$store.commit('set_active_index', val);
-      }
-    }
-  },
-  watch: {
-    '$route'(to) {
-      let flag = false;
-      for (let option of this.options ) {
-        if (option.name === to.name) {
-          flag = true;
-          this.$store.commit('set_active_index', '/' + to.path.split('/')[1]);
-          break
-        }
-      }
-      if (!flag) {
-        this.$store.commit('add_tabs', {route: '/' + to.path.split('/')[1], name: to.name});
-        this.$store.commit('set_active_index', '/' + to.path.split('/')[1]);
-      }
-    }
   }
+  // computed: {
+  //   options () {
+  //     return this.$store.state.options;
+  //   },
+  //   activeIndex: {
+  //     get () {
+  //       return this.$store.state.activeIndex;
+  //     },
+  //     set (val) {
+  //       this.$store.commit('set_active_index', val);
+  //     }
+  //   }
+  // },
+  // watch: {
+  //   '$route'(to) {
+  //     let flag = false;
+  //     for (let option of this.options ) {
+  //       if (option.name === to.name) {
+  //         flag = true;
+  //         this.$store.commit('set_active_index', '/' + to.path.split('/')[1]);
+  //         break
+  //       }
+  //     }
+  //     if (!flag) {
+  //       this.$store.commit('add_tabs', {route: '/' + to.path.split('/')[1], name: to.name});
+  //       this.$store.commit('set_active_index', '/' + to.path.split('/')[1]);
+  //     }
+  //   }
+  // }
 };
 </script>
 
 <style lang="less">
 #app {
   // position: relative;
-  .el-table th.is-leaf{
-    padding:0px;
-    height:50px;
-    background:#f8f8f8;
+  .el-table th.is-leaf {
+    padding: 0px;
+    height: 50px;
+    background: #f8f8f8;
   }
 }
 body {
@@ -149,9 +162,9 @@ body {
 }
 
 .body-content {
-  background: #FFF;
+  background: #fff;
   border: 0px solid transparent;
-  margin: 0 20px 20px  20px !important;
+  margin: 0 20px 20px 20px !important;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -172,16 +185,16 @@ body {
     min-width: 1080px;
     background: #fff;
     z-index: 1;
-    .line{
+    .line {
       // margin:0 auto;
-      height:1px;
+      height: 1px;
       //  border-bottom: 1px solid #ddd;
-       background: #ddd;
-       margin-left: 20px;
-       max-width:1130px;
+      background: #ddd;
+      margin-left: 20px;
+      max-width: 1130px;
     }
-    .linenav{
-      background:#ffffff !important;
+    .linenav {
+      background: #ffffff !important;
     }
     .content-inner-wrapper {
       min-height: 500px;
@@ -218,7 +231,7 @@ body {
   border-radius: 2px;
   width: 400px;
   padding: 80px 100px 40px;
-  background: #FFF;
+  background: #fff;
   margin: 150px auto 0;
   p {
     font-size: 14px;
@@ -232,7 +245,7 @@ body {
 .pv-incorrect-wrapper {
   width: 700px;
   padding: 80px 100px;
-  background: #F8F8F8;
+  background: #f8f8f8;
   margin: 150px auto 0;
   p {
     font-size: 14px;
@@ -254,7 +267,7 @@ body {
   // top: 0;
   // right: 0;
   // left: 200px;
-  background:#ffffff;
+  background: #ffffff;
   // box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
   // z-index: 1;
 }
