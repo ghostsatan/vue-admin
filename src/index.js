@@ -15,9 +15,11 @@ import ElementUI from 'element-ui';
 import echarts from 'echarts';
 // 引入i18n国际化
 import i18n from './i18n/';
+import VueBarcode from '@xkeshi/vue-barcode'; //导入条形码插件
 
-Vue.prototype.$echarts = echarts 
+Vue.prototype.$echarts = echarts;
 
+Vue.component('barcode', VueBarcode);
 
 moment.locale('zh-cn');
 Vue.prototype.$moment = moment;

@@ -12,25 +12,28 @@ export default new Vuex.Store({
     navTags: [],
     isNavMenuOpen: true
   },
-  // 2019年12月20日14:32:51
+  // 2019年12月20日14:32:51新增动态tab
   getters: {
-    activeTag (state) {
+    activeTag(state) {
       let tag = state.navTags.find((item) => {
         return item.active === true
       })
       return tag ? tag.index : ''
     },
-    navTagIndexs (state) {
+    navTagIndexs(state) {
       return state.navTags.map((item) => {
         return item.index
       })
     }
   },
   mutations: {
-    toggleMenuOpen (state, payload) {
+    setUserInfo(state, payload) {
+      state.userInfo = payload;
+    },
+    toggleMenuOpen(state, payload) {
       state.isNavMenuOpen = !state.isNavMenuOpen
     },
-    addNavTags (state, view) {
+    addNavTags(state, view) {
       let index = findIndex(state.navTags, 'index', view.meta.index)
 
       state.navTags.forEach((item) => {
@@ -47,7 +50,7 @@ export default new Vuex.Store({
         state.navTags[index].active = true
       }
     },
-    removeOneNavTag (state, payload) {
+    removeOneNavTag(state, payload) {
       let index = state.navTags.findIndex((item) => {
         return item.index === payload.index
       })
@@ -58,10 +61,10 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    addNavTags ({ state, commit }, view) {
+    addNavTags({ state, commit }, view) {
       commit('addNavTags', view)
     },
-    removeOneNavTag ({ state, commit }, payload) {
+    removeOneNavTag({ state, commit }, payload) {
       commit('removeOneNavTag', payload)
     }
   }

@@ -19,7 +19,7 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      console.log(to, from)
+      // console.log(to, from)
       this.addCachedView(to)
     }
   },
@@ -50,7 +50,7 @@ export default {
         } else if (this.tags[index - 1]) {
           this.activeTag(this.tags[index - 1].index)
         } else {
-          this.$router.push(`/Home`)
+          this.$router.push(`/TableList`)
         }
       } 
       
@@ -63,8 +63,6 @@ export default {
       // this.activeTag(nextTag)
     },
     activeTag (tag) {
-      console.log(1212121212121)
-      console.log(12,tag);
       this.$router.push(tag)
     }
   },

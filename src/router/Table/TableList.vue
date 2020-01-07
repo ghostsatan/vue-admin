@@ -43,7 +43,7 @@
         <div class="alertChoce" v-show="choseItems">
           <el-checkbox v-model="checked1" @change="changeCheck">备选项1</el-checkbox>
         </div>
-      </el-row> -->
+      </el-row>-->
       <table-template
         :tableData="tableData"
         :tableColumns="listColumns"
@@ -71,6 +71,9 @@
     <div class="cw-button">
       <el-button type="primary" @click="testProcess" :message="id">测试弹窗</el-button>
       <el-button type="primary">测试功能</el-button>
+    </div>
+    <div class="printOrder" v-for="(v,index) in list" :key="index">
+      <barcode :value="v.barcodes" :options="barcode_option" tag="svg"></barcode>
     </div>
     <div class="operation-dialog">
       <test-process ref="testProcess" v-on:titleChanged="updateTitle"></test-process>
@@ -100,33 +103,45 @@ export default {
         startTime: "",
         endTime: ""
       },
+      barcode_option: {
+        displayValue: true, //是否默认显示条形码数据
+        //textPosition  :'top', //条形码数据显示的位置
+        background: "#fff", //条形码背景颜色
+        valid: function(valid) {
+          console.log(valid);
+        },
+        width: "1px",
+        height: "55px",
+        fontSize: "22px" //字体大小
+      },
+      list: [{ barcodes: "A01-01-01" }, { barcodes: "A01-01-01" }],
       listColumns: [
         {
           title: "id",
-          prop:"id",
+          prop: "id",
           isShow: true
         },
         {
           title: "商户名",
-          prop:"tag",
+          prop: "tag",
           isShow: true
         },
         {
           title: "商户2",
-          prop:"hotelName",
+          prop: "hotelName",
           isShow: true
         }
       ],
-      headerBackColor:"#1087",
-      cellBackColor:"#981",
-      cellBorderColor:"	#DB7093",
+      headerBackColor: "#1087",
+      cellBackColor: "#981",
+      cellBorderColor: "	#DB7093",
       // test: false,
       // checked1: false,
       // choseItems: false,
       title: "父级标qqq1111111题",
       // disabled: true,
       id: "12",
-      tableData:[],
+      tableData: [],
       startPickerOptions: {
         disabledDate(time) {
           return (
@@ -171,7 +186,7 @@ export default {
     sortChange(col, prop, order) {
       console.log(col, prop, order);
     },
-    Del(d){
+    Del(d) {
       console.log(d);
       //触发父级方法
       console.log("父级删除");
@@ -184,9 +199,9 @@ export default {
     choceItems() {
       this.choseItems = !this.choseItems;
     },
-    select(val){
+    select(val) {
       console.log("触发多选");
-      console.log(11112121212,val);
+      console.log(11112121212, val);
     },
     changeCheck() {
       this.test = !this.test;

@@ -147,6 +147,9 @@ export default {
 
 <style lang="less">
 #app {
+  .app-wrap{
+    padding: 10px 3px 0px 20px;
+  }
   // position: relative;
   .el-table th.is-leaf {
     padding: 0px;
