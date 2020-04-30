@@ -70,7 +70,7 @@
     </div>
     <div class="cw-button">
       <el-button type="primary" @click="testProcess" :message="id">测试弹窗</el-button>
-      <el-button type="primary">测试功能</el-button>
+      <el-button type="primary" v-debounce="test">测试功能</el-button>
     </div>
     <div class="printOrder" v-for="(v,index) in list" :key="index">
       <barcode :value="v.barcodes" :options="barcode_option" tag="svg"></barcode>
@@ -194,6 +194,9 @@ export default {
 
     go() {
       this.$router.push({ path: "/Table/Detail" });
+    },
+    test(){
+      console.log(123);
     },
     //选择项弹窗显示隐藏；
     choceItems() {
