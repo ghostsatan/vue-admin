@@ -31,7 +31,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="success" size="small" @click="search">{{$t("search")}}</el-button>
-        <el-button size="small">{{$t("reset")}}</el-button>
+        <el-button size="small" @click="reset" v-no-more-click>{{$t("reset")}}</el-button>
       </el-form-item>
     </el-form>
     <div>
@@ -197,6 +197,9 @@ export default {
     },
     test(){
       console.log(123);
+    },
+    reset(){
+      console.log(23232323);
     },
     //选择项弹窗显示隐藏；
     choceItems() {
